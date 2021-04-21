@@ -1,6 +1,7 @@
 package com.example.gm_coding.viewModel
 
 import android.util.Log
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,15 +16,16 @@ import retrofit2.Response
 
 class LaunchViewModel:ViewModel() {
     private val TAG = "LaunchViewModel"
-    var artistName = "Mike"
+    var artistName = ObservableField<String>()
 
     private val _trackResponse = MutableLiveData<TrackResponse>()
 
     val trackResponse: LiveData<TrackResponse>
         get() = _trackResponse
 
-    fun getArtists(name:String ){
+    fun getArtists( ){
         Log.d(TAG, "getArtists: these artist be gotten")
+        Log.d(TAG, "getArtists: ${artistName.get()}")
         viewModelScope.launch(Dispatchers.Default){
             val callback : Callback<TrackResponse> = object: Callback<TrackResponse> {
                 override fun onResponse(
@@ -38,7 +40,7 @@ class LaunchViewModel:ViewModel() {
                 }
 
             }
-            TrackRepo.trackService.getTrackResponse(name).enqueue(callback)
+            TrackRepo.trackService.getTrackResponse(artistName.get() ?: "Billy Joel").enqueue(callback)
         }
     }
 }
