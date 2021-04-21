@@ -9,5 +9,15 @@
         android:id="@+id/launchFragment"
         android:name="com.example.gm_coding.view.LaunchFragment"
         android:label="fragment_launch"
-        tools:layout="@layout/fragment_launch" />
+        tools:layout="@layout/fragment_launch" >
+        <action
+            android:id="@+id/action_launchFragment_to_artistListFragment"
+            app:destination="@id/artistListFragment"
+            app:popUpTo="@id/launchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/artistListFragment"
+        android:name="com.example.gm_coding.view.ArtistListFragment"
+        android:label="fragment_artist_list"
+        tools:layout="@layout/fragment_artist_list" />
 </navigation>

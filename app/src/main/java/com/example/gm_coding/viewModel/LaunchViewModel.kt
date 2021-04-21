@@ -19,11 +19,15 @@ import retrofit2.Response
 class LaunchViewModel:ViewModel() {
     private val TAG = "LaunchViewModel"
     var artistName = ObservableField<String>()
-    private val _trackResponse = MutableLiveData<TrackResponse>()
+    var spinnerVisibility = ObservableField(View.INVISIBLE)
 
+    private val _trackResponse = MutableLiveData<TrackResponse>()
     val trackResponse: LiveData<TrackResponse>
         get() = _trackResponse
-    var spinnerVisibility = ObservableField(View.INVISIBLE)
+
+    private val _switchToArtistListFragment = MutableLiveData<Boolean>()
+    val switchToArtistListFragment : LiveData<Boolean>
+        get() = _switchToArtistListFragment
 
 
 
@@ -38,6 +42,7 @@ class LaunchViewModel:ViewModel() {
                     response: Response<TrackResponse>
                 ) {
                     _trackResponse.value =  response.body()
+                    _switchToArtistListFragment.value = true
                 }
 
                 override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
