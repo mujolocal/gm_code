@@ -15,13 +15,14 @@ import retrofit2.Response
 
 class LaunchViewModel:ViewModel() {
     private val TAG = "LaunchViewModel"
+    var artistName = "Mike"
 
     private val _trackResponse = MutableLiveData<TrackResponse>()
 
     val trackResponse: LiveData<TrackResponse>
         get() = _trackResponse
 
-    fun getArtists(){
+    fun getArtists(name:String ){
         Log.d(TAG, "getArtists: these artist be gotten")
         viewModelScope.launch(Dispatchers.Default){
             val callback : Callback<TrackResponse> = object: Callback<TrackResponse> {
@@ -37,7 +38,7 @@ class LaunchViewModel:ViewModel() {
                 }
 
             }
-            TrackRepo.trackService.getTrackResponse().enqueue(callback)
+            TrackRepo.trackService.getTrackResponse(name).enqueue(callback)
         }
     }
 }

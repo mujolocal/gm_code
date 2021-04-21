@@ -5,6 +5,7 @@
         <variable
             name="launchViewModel"
             type="com.example.gm_coding.viewModel.LaunchViewModel" />
+
     </data>
     <LinearLayout
     android:layout_width="match_parent"
@@ -19,7 +20,7 @@
         android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/get_tracks_btn"
-        android:onClick="@{() -> launchViewModel.getArtists()}"
+        android:onClick="@{() -> launchViewModel.getArtists(launchViewModel.artistName)}"
         android:text="Enter Artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

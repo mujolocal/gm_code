@@ -8,6 +8,6 @@ import retrofit2.http.Query
 
 interface TrackService {
 
-    @GET("search/{mike}")
-    fun getTrackResponse():Call<TrackResponse>
+    @GET("search")
+    fun getTrackResponse(@Query("term") term: String):Call<TrackResponse>
 }
