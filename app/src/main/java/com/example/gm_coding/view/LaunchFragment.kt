@@ -2,6 +2,7 @@ package com.example.gm_coding.view
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +18,9 @@ import com.squareup.moshi.Moshi
 
 
 class LaunchFragment : Fragment() {
+    private val TAG = "LaunchFragment"
     lateinit var launchViewModel: LaunchViewModel
-    val sharedPref = this.activity?.getPreferences(Context.MODE_PRIVATE)
-    val moshi = Moshi.Builder().build()
-    val jsonAdapter = moshi.adapter(TrackResponse::class.java)
+
 
 
     override fun onCreateView(
@@ -33,28 +33,21 @@ class LaunchFragment : Fragment() {
             container,
             false
         )
+
         launchViewModel  = ViewModelProvider(this).get(LaunchViewModel::class.java)
         binding.launchViewModel = launchViewModel
         launchViewModel.trackResponse.observe(viewLifecycleOwner){
-            with(sharedPref?.edit()){
-                this?.putString(getString(R.string.artists_songs),jsonAdapter.toJson(it) )
-            }
+            toArtistList(it)
         }
-        launchViewModel.switchToArtistListFragment.observe(viewLifecycleOwner){
-            if (it){
-                toArtistList()
-            }
-        }
-
-
 
         return binding.root
     }
 
 
 
-    fun toArtistList(){
-        val action = LaunchFragmentDirections.actionLaunchFragmentToArtistListFragment()
+    fun toArtistList(trackResponse: TrackResponse){
+        val action = LaunchFragmentDirections.actionLaunchFragmentToArtistListFragment(trackResponse)
+
         NavHostFragment.findNavController(this).navigate(action)
     }
 

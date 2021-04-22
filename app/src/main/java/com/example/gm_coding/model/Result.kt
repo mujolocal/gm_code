@@ -3,6 +3,7 @@ package com.example.gm_coding.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class Result(
@@ -90,4 +91,4 @@ data class Result(
     val trackViewUrl: String?,
     @Json(name = "wrapperType")
     val wrapperType: String?
-)
+): Serializable
