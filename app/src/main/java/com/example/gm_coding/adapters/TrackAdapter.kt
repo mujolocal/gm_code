@@ -1,19 +1,14 @@
 package com.example.gm_coding.adapters
 
-import android.content.ContentValues
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gm_coding.R
 import com.example.gm_coding.model.Result
 
-class SongAdapter(private val results: List<Result>) :RecyclerView.Adapter<SongAdapter.ViewHolder>(){
+class TrackAdapter(private val results: List<Result>) :RecyclerView.Adapter<TrackAdapter.ViewHolder>(){
     private  val TAG = "SongAdapter"
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val artistNameTv: TextView
