@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">gm_coding</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="artist_name_example">Billy Joel</string>
     <string name="artists_songs">artist_songs</string>
+    <string name="search">Search</string>
+    <string name="space">&#160;</string>
+    <string name="dash">-</string>
+    <string name="search_an_artists_name">Search an artists name.</string>
 </resources>

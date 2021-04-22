@@ -1,45 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_gravity="center">
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="track"
+            type="com.example.gm_coding.model.Result" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="fill_horizontal">
-    <TextView
-        android:id="@+id/artist_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_margin="8dp">
 
-        <TextView
-            android:id="@+id/track_name_tv"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@{track.artistName.concat(@string/dash).concat(track.trackName)}"
+            android:textAppearance="?textAppearanceHeadline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="JAY-Z Blue" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="fill_horizontal">
-        <TextView
-            android:id="@+id/release_date_tv"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/subtitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/primary_genre_name_tv"
+            android:layout_height="wrap_content"
+            android:textAppearance="?textAppearanceHeadline6"
+            app:date="@{track.releaseDate}"
+            app:genre="@{track.primaryGenreName}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="TimeStamp Genre" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/track_price_tv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textAppearance="?textAppearanceHeadline5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subtitle"
+            app:toCurrency="@{track.trackPrice}"
+            tools:text="10.99" />
 
-
-    </LinearLayout>
-    <TextView
-        android:id="@+id/track_price_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
