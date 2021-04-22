@@ -11,7 +11,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.4.32'
 }
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
@@ -85,5 +85,7 @@ dependencies {
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.11.0")
 
     apply plugin: "androidx.navigation.safeargs.kotlin"
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0'
 
 }

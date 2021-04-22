@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.gm_coding.R
+import com.example.gm_coding.databinding.FragmentArtistListBinding
 
 
 class ArtistListFragment : Fragment() {
@@ -16,7 +17,9 @@ class ArtistListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_artist_list, container, false)
+        val binding = FragmentArtistListBinding.inflate(inflater,container,false)
+
+        return binding.root
     }
 
 

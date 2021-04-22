@@ -1,8 +1,9 @@
 package com.example.gm_coding.viewModel
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.View
-import androidx.databinding.Bindable
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,6 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class LaunchViewModel:ViewModel() {
     private val TAG = "LaunchViewModel"
     var artistName = ObservableField<String>()
@@ -28,9 +30,6 @@ class LaunchViewModel:ViewModel() {
     private val _switchToArtistListFragment = MutableLiveData<Boolean>()
     val switchToArtistListFragment : LiveData<Boolean>
         get() = _switchToArtistListFragment
-
-
-
 
     fun getArtists( ){
         spinnerVisibility.set(View.VISIBLE)
@@ -46,11 +45,13 @@ class LaunchViewModel:ViewModel() {
                 }
 
                 override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
-                    Log.d(TAG, "onFailure: "+t)
+                    Log.d(TAG, "onFailure: " + t)
                 }
 
             }
-            TrackRepo.trackService.getTrackResponse(artistName.get() ?: "Billy Joel").enqueue(callback)
+            TrackRepo.trackService.getTrackResponse(artistName.get() ?: "Billy Joel").enqueue(
+                callback
+            )
             spinnerVisibility.set(View.INVISIBLE)
         }
 
