@@ -1,55 +1,34 @@
 package com.example.gm_coding.view
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.gm_coding.R
 import com.example.gm_coding.databinding.FragmentLaunchBinding
-import com.example.gm_coding.model.TrackResponse
+import com.example.gm_coding.util.ApiState
 import com.example.gm_coding.viewModel.LaunchViewModel
-import com.squareup.moshi.Json
-import com.squareup.moshi.Moshi
 
 
-class LaunchFragment : Fragment() {
-    private val TAG = "LaunchFragment"
-    lateinit var launchViewModel: LaunchViewModel
+class LaunchFragment : Fragment(R.layout.fragment_launch) {
 
+    private val launchVM by viewModels<LaunchViewModel>()
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val binding: FragmentLaunchBinding = FragmentLaunchBinding.inflate(
-            inflater,
-            container,
-            false
-        )
-
-        launchViewModel  = ViewModelProvider(this).get(LaunchViewModel::class.java)
-        binding.launchViewModel = launchViewModel
-        launchViewModel.trackResponse.observe(viewLifecycleOwner){
-            toArtistList(it)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        FragmentLaunchBinding.bind(view).apply {
+            lifecycleOwner = viewLifecycleOwner
+            launchViewModel = launchVM
         }
-
-        return binding.root
+        launchVM.apiState.observe(viewLifecycleOwner) { response ->
+            if (response is ApiState.Success) {
+                val action = LaunchFragmentDirections.actionLaunchFragmentToArtistListFragment(
+                    response.tracks.toTypedArray()
+                )
+                findNavController().navigate(action)
+                launchVM.toggleCompletedState()
+            }
+        }
     }
-
-
-
-    fun toArtistList(trackResponse: TrackResponse){
-        val action = LaunchFragmentDirections.actionLaunchFragmentToArtistListFragment(trackResponse)
-
-        NavHostFragment.findNavController(this).navigate(action)
-    }
-
-
 }

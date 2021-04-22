@@ -1,10 +1,12 @@
 package com.example.gm_coding.model
 
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import java.io.Serializable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class Result(
     @Json(name = "artistId")
@@ -91,4 +93,4 @@ data class Result(
     val trackViewUrl: String?,
     @Json(name = "wrapperType")
     val wrapperType: String?
-): Serializable
+) : Parcelable

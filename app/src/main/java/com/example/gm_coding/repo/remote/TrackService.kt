@@ -10,4 +10,7 @@ interface TrackService {
 
     @GET("search")
     fun getTrackResponse(@Query("term") term: String):Call<TrackResponse>
+
+    @GET("search")
+    suspend fun getTrackResponse2(@Query("term") term: String): TrackResponse
 }
